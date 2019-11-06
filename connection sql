@@ -1,0 +1,56 @@
+迴聲“＃java-test-learn” >> README.md 
+git init 
+git add README.md 
+git commit -m“第一次提交” 
+git remote add origin https://github.com/ken590love/java-test-learn.git
+ git push -u原始主機
+package lottlySample;
+import java.sql.*;
+public class Sql {
+	//JDBC驅動名及資料庫URL
+	static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/cmdev?useUnicode=true&"
+			+ "characterEncoding=utf-8&useSSL=false&serverTimezone=UTC";
+	static final String USER ="root";
+	static final String PASS ="qw12as45";
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		Statement stmt = null;
+	try{
+		//註冊JDBC驅動
+		Class.forName(JDBC_DRIVER);
+		//連結
+		System.out.println("連結資料庫");
+		conn = DriverManager.getConnection(DB_URL,USER,PASS);
+		//執行和查詢
+		System.out.println("實例化Statement");
+		stmt = conn.createStatement();
+		String sql;
+		sql = "SELECT empno,ename,job FROM emp";
+		ResultSet rs = stmt.executeQuery(sql);
+		//收集資料庫資料
+		while(rs.next()){
+			//利用字段搜索
+			int empno = rs.getInt("empno");
+			String ename = rs.getString("ename");
+			String job = rs.getString("job");
+			//輸出資料
+			System.out.print("empno: "+empno+" ");
+			System.out.print("ename: "+ename+" ");
+			System.out.print("job: "+job+"\n");
+		}
+		//close all function
+		rs.close();
+		stmt.close();
+		conn.close();
+	}catch(SQLException se){
+		//處理jdbc錯誤
+		se.printStackTrace();
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	System.out.println("bye");
+	}
+
+}
