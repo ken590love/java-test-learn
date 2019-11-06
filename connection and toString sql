@@ -1,9 +1,3 @@
-迴聲“＃java-test-learn” >> README.md 
-git init 
-git add README.md 
-git commit -m“第一次提交” 
-git remote add origin https://github.com/ken590love/java-test-learn.git
- git push -u原始主機
 package lottlySample;
 import java.sql.*;
 public class Sql {
